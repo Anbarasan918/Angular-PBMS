@@ -1,0 +1,60 @@
+<div class="simple-form-wrapper">
+    <div class="options-wrapper">
+        <!-- action icons -->
+        <h4>New Pump</h4>
+        <div class="actions">
+            <button mat-button class="button" (click)="goToList()" matTooltip="View Pumps" color="primary">
+                <mat-icon aria-label="main toolbar logout icon">list</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Pump</mat-card-title>
+            <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+        </mat-card-header>
+
+        <mat-card-content  >
+            <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <!-- nam, last name ... -->
+                        <div class="mdc-layout-grid__cell">
+                            <section>
+                                <mat-form-field>
+                                    <input matInput placeholder="name" [(ngModel)]="nozzle.name" name="name">
+                                    
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <input type="number" matInput placeholder="Reading" [(ngModel)]="nozzle.currentReading" name="currentReading">
+                                    
+                                </mat-form-field>
+                            </section>
+                        </div>
+
+                        <div class="mdc-layout-grid__cell">
+                            <section>
+                                <mat-form-field>
+                                    <mat-label>Tank</mat-label>
+                                    <mat-select [(ngModel)]="nozzle.tankId" name="TANK_ID">
+                                        <mat-option *ngFor="let tank of tankList" [value]="tank.name">
+                                            {{tank.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    
+                                </mat-form-field>
+                            </section>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

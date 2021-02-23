@@ -1,0 +1,109 @@
+<form [formGroup]="pumpSales"  class="tabs-form">
+    <table class="table table-border" [ngClass]="{'table-dark': mode}">
+        <thead class="text-nowrap">
+            <th  > 
+                <button    mat-button class="button" (click)="addRow()" matTooltip="Add new" color="primary">
+                    <mat-icon aria-label="main toolbar logout icon">add_circle</mat-icon>
+                </button>
+            </th>
+            <th>Nozzle Name</th>
+            <th>Meter Opening</th>
+            <th>Meter Closing</th> 
+            <th>Sales (Ltr)</th>
+            <th>Proudct</th>
+            <th>Amount</th>
+        </thead>
+        <tbody>
+            <ng-container formArrayName="entries" *ngFor="let group of getFormControls.controls ; let i=index">
+                <tr [formGroupName]="i">
+                    <td class="add-row-btn">
+                        <button   mat-button class="button" (click)="deleteRow(i)" matTooltip="Add new" color="primary">
+                            <mat-icon aria-label="main toolbar logout icon">remove_circle</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <mat-select formControlName="name" name="productId">
+                                <mat-option *ngFor="let product of pumps" [value]="product.uuid" class="invalid-feedback">
+                                    {{product.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    <div *ngIf="entries.controls[i].controls.name.touched==true">
+                        <div *ngIf="entries.controls[i].controls.name.errors!=null && entries.controls[i].controls.name.errors.required==true">
+                            Name is Required
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input  matInput type="number" formControlName="meterOpening">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.meterOpening.touched==true">
+                        <div *ngIf="entries.controls[i].controls.meterOpening.errors!=null && entries.controls[i].controls.meterOpening.errors.required==true">
+                            Meter opening  is Required
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="meterClosing">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.meterClosing.touched==true">
+                        <div *ngIf="entries.controls[i].controls.meterClosing.errors!=null && entries.controls[i].controls.meterClosing.errors.required==true">
+                            Meter Closing  is Required
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="sales">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.sales.touched==true">
+                        <div *ngIf="entries.controls[i].controls.sales.errors!=null && entries.controls[i].controls.sales.errors.required==true">
+                            Sales  is Required
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="product" [value]="product">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.product.touched==true">
+                        <div *ngIf="entries.controls[i].controls.product.errors!=null && entries.controls[i].controls.product.errors.required==true">
+                            Product  is Required
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="amount">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.amount.touched==true">
+                        <div *ngIf="entries.controls[i].controls.amount.errors!=null && entries.controls[i].controls.amount.errors.required==true">
+                            Amount  is Required
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                        <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                    </td>
+                </tr>
+
+            </ng-container>
+        </tbody>
+    </table> 
+</form>
+ 
+<div class="footer">   
+    <span class="fill-space"></span> 
+    <button mat-flat-button color="primary" (click)="onSubmit()" type="button">
+        <span>Submit</span>
+    </button>
+</div>
+
+<div class="content" >
+    <!-- <app-footerdynamic-table [displayedColumns]="displayedColumns" [gridData]="pumpSales.value.entries" ></app-footerdynamic-table> -->
+    <app-dynamic-table [displayedColumns]="displayedColumns"  [dataTableConfig]="dataTableConfig" [gridData]="gridData" ></app-dynamic-table>
+</div>

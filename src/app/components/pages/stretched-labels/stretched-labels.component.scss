@@ -1,0 +1,47 @@
+
+h3{
+    padding: 21px;
+}
+
+form{
+    overflow: scroll;
+}
+
+mat-icon {
+    cursor: pointer;
+  }
+
+  table{
+    margin-top: 30px;
+  }
+  
+  .action-container {
+    display: flex;
+    justify-content: space-between; 
+  }
+    
+  .delete {
+    color: red  ;
+  }
+  
+  .done {
+    color: green;
+  }
+  
+  .edit {
+    color: yellow;
+  }
+  
+  span.ui-column-resizer {
+    width: 100%;
+    height: 100%;
+    cursor: col-resize; 
+  
+  }
+
+  .details{
+    border: 1px solid black;
+    border-radius: 15px;
+  }
+
+ 

@@ -1,0 +1,97 @@
+<div class="simple-form-wrapper">
+    <h2>A simple form</h2>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Personal data</mat-card-title>
+            <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <!-- nam, last name ... -->
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="Your name">
+                                <mat-icon matSuffix>face</mat-icon>
+                            </mat-form-field>
+                            
+
+                            <mat-form-field>
+                                <input matInput placeholder="Phone No">
+                                <mat-icon matSuffix>phonenumber</mat-icon>
+                            </mat-form-field>
+                        </section>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="address">
+                                <mat-icon matSuffix>place</mat-icon>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                                <input matInput placeholder="Date Of Joining">
+                                <mat-icon matSuffix>date</mat-icon>
+                            </mat-form-field>
+
+                        </section>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="Blood Group">
+                                <mat-icon matSuffix>blood</mat-icon>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                                <input matInput placeholder="Id Proff">
+                                <mat-icon matSuffix>card</mat-icon>
+                            </mat-form-field>
+
+                        </section>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="Emergency Number">
+                                <mat-icon matSuffix>phonenumber</mat-icon>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                                <input matInput placeholder="Empolyee Id">
+                                <mat-icon matSuffix>id</mat-icon>
+                            </mat-form-field>
+
+                        </section>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="Designation">
+                                <mat-icon matSuffix>designation</mat-icon>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                                <input matInput placeholder="Qualification">
+                                <mat-icon matSuffix>qualification</mat-icon>
+                            </mat-form-field>
+
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-flat-button color="primary" (click)="empolyeeCreationDetails()">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

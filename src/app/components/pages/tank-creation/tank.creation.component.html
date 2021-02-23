@@ -1,0 +1,64 @@
+<div class="simple-form-wrapper">
+    <div class="options-wrapper">
+        <!-- action icons -->
+        <h4>New Tank</h4>
+        <div class="actions">
+            <button mat-button class="button" (click)="goToList()" matTooltip="View Tanks" color="primary">
+                <mat-icon aria-label="main toolbar logout icon">list</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Tank</mat-card-title>
+            <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+        </mat-card-header>
+
+        <mat-card-content  >
+            <form (ngSubmit)="onSubmit()" #heroForm="ngForm" >
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <!-- nam, last name ... -->
+                        <div class="mdc-layout-grid__cell">
+                            <section>
+                                <mat-form-field>
+                                    <input matInput placeholder="Name" [(ngModel)]="tank.name" name="name"> 
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <mat-label>Product</mat-label>
+                                    <mat-select [(ngModel)]="tank.productId" name="productId">
+                                        <mat-option *ngFor="let product of products" [value]="product.name">
+                                            {{product.name}}
+                                        </mat-option>
+                                    </mat-select> 
+                                </mat-form-field>
+                            </section>
+                        </div>
+
+                        <div class="mdc-layout-grid__cell">
+                            <section>
+                                <mat-form-field>
+                                    <input type="number" matInput placeholder="Minimum Volume" name="minimumVolume" [(ngModel)]="tank.minimumVolume"> 
+                                </mat-form-field>
+                            </section>
+                        </div>
+
+                        <div class="mdc-layout-grid__cell">
+                            <section>
+                                <mat-form-field>
+                                    <input type="number" matInput placeholder="Maximum Volume" name="maximumVolume" [(ngModel)]="tank.maximumVolume"> 
+                                </mat-form-field>
+                            </section>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

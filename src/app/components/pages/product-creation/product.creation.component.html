@@ -1,0 +1,51 @@
+<div class="simple-form-wrapper">
+    <div class="options-wrapper">  
+        <!-- action icons -->
+        <h4>New Tank</h4>
+        <div class="actions"> 
+            <button  mat-button class="button" (click)="goToList()" matTooltip="View Tanks" color="primary">
+                <mat-icon aria-label="main toolbar logout icon">list</mat-icon>
+            </button>   
+        </div>
+    </div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Tank</mat-card-title>
+            <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <!-- nam, last name ... -->
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="name">
+                                <mat-icon matSuffix>face</mat-icon>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input matInput placeholder="Volume">
+                                <mat-icon matSuffix>face</mat-icon>
+                            </mat-form-field>
+                        </section>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell">
+                        <section>
+                            <mat-form-field>
+                                <input matInput placeholder="Product"> 
+                            </mat-form-field>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-flat-button color="primary">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

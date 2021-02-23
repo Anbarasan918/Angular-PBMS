@@ -1,0 +1,31 @@
+.simple-form-wrapper {
+    padding: 0 24px 24px;
+
+    h2 {
+        font-weight: 400;
+        padding-left: 8px;
+    }
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+div.options-wrapper {
+    padding: 0px 8px 0 24px;
+}
+div.options-wrapper div.actions {
+    margin-top: -46px;
+    float: right;
+}
+
+form{
+    overflow: scroll;
+}

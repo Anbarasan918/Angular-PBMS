@@ -1,0 +1,133 @@
+<div class="simple-form-wrapper">
+    <h2>Salary Management</h2>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Salary Entry</mat-card-title>
+            <!-- <mat-card-subtitle>subtitle</mat-card-subtitle> -->
+        </mat-card-header>
+
+        <mat-card-content>
+            <form [formGroup]="salaryEntry" (ngSubmit)="onSubmit()">
+                <table class="table table-border" [ngClass]="{'table-dark': mode}">
+                    <thead class="text-nowrap">
+                        <th>StaffName</th>
+                        <th>FixedSalary</th>
+                        <th>PresentDays</th>
+                        <th>OT</th>
+                        <th>SalaryAmount</th>
+                        <th>AdvAmount</th>
+                        <th>ReceivedAdvance</th>
+                        <th>BalanceAdvance</th>
+                        <th>paidAdvance</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <ng-container formArrayName="entries" *ngFor="let group of getFormControls.controls ; let i=index">
+                            <tr [formGroupName]="i">
+                                <td>
+                                    <mat-form-field>
+                                       <input matInput type="text" formControlName="staffName" />
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.staffName.touched==true">
+                                        <div *ngIf="entries.controls[i].controls.staffName.errors!=null && entries.controls[i].controls.staffName.errors.required==true">
+                                            Name is Required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input  matInput type="number" formControlName="fixedSalary">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.fixedSalary.touched==true">
+                                        <div *ngIf="entries.controls[i].controls.fixedSalary.errors!=null && entries.controls[i].controls.fixedSalary.errors.required==true">
+                                            FixedSalary is Required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="presentDays">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.presentDays.touched==true">
+                                        <div *ngIf="entries.controls[i].controls.presentDays.errors!=null && entries.controls[i].controls.presentDays.errors.required==true">
+                                            PresentDays is Required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="ot">
+                                    </mat-form-field>
+                                    
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="text" formControlName="salaryAmount" >
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.salaryAmount.touched==true">
+                                        <div *ngIf="entries.controls[i].controls.salaryAmount.errors!=null && entries.controls[i].controls.salaryAmount.errors.required==true">
+                                            SalaryAmount is Required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="advAmount">
+                                    </mat-form-field>
+                                    
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="receivedAdvance">
+                                    </mat-form-field>
+                                    
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="balanceAdvance">
+                                    </mat-form-field>
+                                   
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="paidAdvance">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.paidAdvance.touched==true">
+                                        <div *ngIf="entries.controls[i].controls.paidAdvance.errors!=null && entries.controls[i].controls.paidAdvance.errors.required==true">
+                                            paidAdvance is Required
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="action">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.action.touched==true">
+                                        <div *ngIf="entries.controls[i].controls.action.errors!=null && entries.controls[i].controls.action.errors.required==true">
+                                            Action is Required
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                    <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                                    <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                                </td>
+                            </tr>
+
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="action-container">
+                    <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
+
+                </div>
+            </form>
+            <span class="fill-space"></span>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-flat-button color="primary">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

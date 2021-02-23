@@ -1,0 +1,177 @@
+<div class="tab-group">
+    <h2>Lubricant Creation</h2>
+  
+    <div style="margin-top: -60px;">
+        <mat-form-field appearance="fill" style="margin-left: 76%;">
+            <mat-label>Value binding</mat-label>
+            <input matInput [matDatepicker]="picker3" [value]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+    </div>
+  
+    <mat-tab-group mat-stretch-tabs dynamicHeight [selectedIndex]="currentTabIndex" (selectedIndexChange)="changeTabIndex($event)" class="example-stretched-tabs mat-elevation-z4">
+        <mat-tab label="Lubricant Producct Entry"  >
+  
+            <form [formGroup]="lubricantCreation">
+                <table class="table table-border" [ngClass]="{'table-dark': mode}">
+                    <thead class="text-nowrap">
+                        <th>Payment Mode</th>
+                        <th>Supplier Name</th>
+                        <th>Invoice Number</th>
+                        <br>
+                        <th>Lubricant Name </th>
+                        <th>Qty(Ltr)</th>
+                        <th>Amount</th>
+                        <th>Discount</th>
+                        <th>Gst%</th>
+                        <th>Gst</th>
+                        <th>Other Tax%</th>
+                        <th>Other Tax</th>
+                        <th>Total Amount</th>
+                    </thead>
+                    <tbody>
+                        <ng-container formArrayName="entries" *ngFor="let group of getFormControls.controls ; let i=index">
+                            <tr [formGroupName]="i">
+                              <td>
+                                <mat-form-field>
+                                  <mat-select formControlName="paymentMode" name="productId">
+                                      <mat-option *ngFor="let pay of paymentMode"  class="invalid-feedback">
+                                          {{pay.name}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                              </td>
+
+
+                              <td>
+                                <mat-form-field>
+                                  <mat-select formControlName="supplierName" name="productId">
+                                      <mat-option *ngFor="let names of supplierName"  class="invalid-feedback">
+                                          {{names.name}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                              </td>
+                              
+
+                              <td>
+                                <mat-form-field>
+                                  <input type="number" matInput formControlName="invoiceNumber"/>
+                              </mat-form-field>
+                              <div *ngIf="entries.controls[i].controls.invoiceNumber.touched==true">
+                                <div *ngIf="entries.controls[i].controls.invoiceNumber.errors!=null && entries.controls[i].controls.invoiceNumber.errors.required==true">
+                                  Lubricant Name  is Required
+                                </div>
+                                </div>
+                              </td>
+                              <br>
+
+                                <td>
+                                    <mat-form-field>
+                                        <input type="number" matInput formControlName="lubricantName"/>
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.lubricantName.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.lubricantName.errors!=null && entries.controls[i].controls.lubricantName.errors.required==true">
+                                        Lubricant Name  is Required
+                                      </div>
+                                      </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="text" formControlName="qty">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.qty.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.qty.errors!=null && entries.controls[i].controls.qty.errors.required==true">
+                                        Qty  is Required
+                                      </div>
+                                      </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="text" formControlName="amount">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.amount.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.amount.errors!=null && entries.controls[i].controls.amount.errors.required==true">
+                                        Amount  is Required
+                                      </div>
+                                      </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="text" formControlName="discount">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.discount.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.discount.errors!=null && entries.controls[i].controls.discount.errors.required==true">
+                                        Discount  is Required
+                                      </div>
+                                      </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="text" formControlName="gstPercentage">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.gstPercentage.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.gstPercentage.errors!=null && entries.controls[i].controls.gstPercentage.errors.required==true">
+                                        Gst Percentage  is Required
+                                      </div>
+                                      </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="number" formControlName="gst">
+                                    </mat-form-field>
+                                    <div *ngIf="entries.controls[i].controls.gst.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.gst.errors!=null && entries.controls[i].controls.gst.errors.required==true">
+                                        Gst  is Required
+                                      </div>
+                                      </div>
+                                </td>
+                                <td>
+                                  <mat-form-field>
+                                      <input matInput type="text" formControlName="otherTaxPercentage">
+                                  </mat-form-field>
+                                  <div *ngIf="entries.controls[i].controls.otherTaxPercentage.touched==true">
+                                      <div *ngIf="entries.controls[i].controls.otherTaxPercentage.errors!=null && entries.controls[i].controls.otherTaxPercentage.errors.required==true">
+                                        otherTaxPercentage  is Required
+                                      </div>
+                                      </div>
+                              </td>
+                              <td>
+                                <mat-form-field>
+                                    <input matInput type="text" formControlName="otherTax">
+                                </mat-form-field>
+                                <div *ngIf="entries.controls[i].controls.otherTax.touched==true">
+                                  <div *ngIf="entries.controls[i].controls.otherTax.errors!=null && entries.controls[i].controls.otherTax.errors.required==true">
+                                      Other Tax  is Required
+                                  </div>
+                                  </div>
+                            </td>
+                            <td>
+                              <mat-form-field>
+                                  <input matInput type="text" formControlName="totalAmount">
+                              </mat-form-field>
+                              <div *ngIf="entries.controls[i].controls.totalAmount.touched==true">
+                                  <div *ngIf="entries.controls[i].controls.totalAmount.errors!=null && entries.controls[i].controls.totalAmount.errors.required==true">
+                                      Total Amount  is Required
+                                  </div>
+                                  </div>
+                          </td>
+                                <td>
+                                    <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                                    <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                                </td>
+                            </tr>
+  
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="action-container">
+                    <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
+              </div>
+  
+            </form>
+          </mat-tab>
+  
+  
+        </mat-tab-group>

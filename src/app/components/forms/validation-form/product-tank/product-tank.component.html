@@ -1,0 +1,115 @@
+<h3 style="text-align: center;">Product to Tank</h3>
+
+      
+<form [formGroup]="ProductTank">
+    <table class="table table-border" [ngClass]="{'table-dark': mode}">
+        <thead class="text-nowrap">
+            <th>Tank Name</th>
+            <th>Product</th>
+            <th>Opening Dip</th>
+            <th>Opening Stock</th>
+            <th>Receipt Qty</th>
+            <th>Closing Dip</th>
+            <th>Closing Stock</th>
+            <th>Actual Closing Stock</th>
+            <th>Variation</th>
+        </thead>
+        <tbody>
+            <ng-container formArrayName="entries" *ngFor="let group of getFormControls.controls ; let i=index">
+                <tr [formGroupName]="i">
+                    <td>
+                        <mat-form-field>
+                           <input type="text" matInput formControlName="tankName"/>
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.tankName.touched==true">
+                            <div *ngIf="entries.controls[i].controls.tankName.errors!=null && entries.controls[i].controls.tankName.errors.required==true">
+                                Tank Name  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="openingDip"/>
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.openingDip.touched==true">
+                            <div *ngIf="entries.controls[i].controls.openingDip.errors!=null && entries.controls[i].controls.openingDip.errors.required==true">
+                                OpeningDip  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="openingStock">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.openingStock.touched==true">
+                            <div *ngIf="entries.controls[i].controls.openingStock.errors!=null && entries.controls[i].controls.openingStock.errors.required==true">
+                                OpeningStock  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="reciptQty">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.reciptQty.touched==true">
+                            <div *ngIf="entries.controls[i].controls.reciptQty.errors!=null && entries.controls[i].controls.reciptQty.errors.required==true">
+                                ReciptQty  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="closingDip">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.closingDip.touched==true">
+                            <div *ngIf="entries.controls[i].controls.closingDip.errors!=null && entries.controls[i].controls.closingDip.errors.required==true">
+                                ClosingDip  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="closingStock">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.closingStock.touched==true">
+                            <div *ngIf="entries.controls[i].controls.closingStock.errors!=null && entries.controls[i].controls.tankName.errors.required==true">
+                                ClosingStock  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="actualClosingStock">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.actualClosingStock.touched==true">
+                            <div *ngIf="entries.controls[i].controls.actualClosingStock.errors!=null && entries.controls[i].controls.actualClosingStock.errors.required==true">
+                                ActualClosingStock  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="variation">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.variation.touched==true">
+                            <div *ngIf="entries.controls[i].controls.variation.errors!=null && entries.controls[i].controls.variation.errors.required==true">
+                                Variation  is Required
+                            </div>
+                            </div>
+                    </td>
+                    <td>
+                        <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                        <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                    </td>
+                </tr>
+
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="action-container">
+        <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
+
+    </div>
+</form>
+
+

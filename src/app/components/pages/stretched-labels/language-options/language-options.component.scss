@@ -1,0 +1,27 @@
+div.content-wrapper {
+    padding: 16px 24px 24px;
+
+    h3 {
+        font-weight: 400;
+    }
+
+    div.d-flex {
+        display: flex;
+        justify-content: space-between;
+        justify-items: center;
+
+        &>section {
+            width: 48%;
+        }
+    }
+}
+
+::ng-deep .mat-option-text {
+    display: flex !important;
+    justify-content: space-between;
+    justify-items: center;
+
+    mat-icon {
+        line-height: inherit;
+    }
+}

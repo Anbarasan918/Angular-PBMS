@@ -1,0 +1,17 @@
+.default-theme .mat-list-base .mat-list-item.active {
+    color: #000;
+    background: lightgray;
+}
+
+.tabs-form{
+    overflow: scroll;
+    padding-top: 35px;
+}
+
+.default-theme div.tab-group mat-header-row {
+    background-color: #fff !important;
+} 
+
+.add-row-btn{
+    max-width: 3px;
+}

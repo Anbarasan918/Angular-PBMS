@@ -1,0 +1,125 @@
+<div class="content">
+    <!--  -->
+    <div class="options-wrapper">
+        <div class="" *ngIf="!dataTableConfig.hideToolbar">
+            <!-- filter -->
+            <mat-form-field class="filter">
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-label>Filter by</mat-label>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="name to filter">
+            </mat-form-field>
+
+            <!-- action icons -->
+            <div class="actions">
+                <!--  -->
+                <button *ngIf="!isMobile" mat-button class="button" (click)="createTank()" matTooltip="Add new" color="primary">
+                    <mat-icon aria-label="main toolbar logout icon">add_circle</mat-icon>
+                </button>
+
+                <button *ngIf="!isMobile" mat-button class="button" matTooltip="Refresh" color="primary">
+                    <mat-icon aria-label="main toolbar logout icon">refresh</mat-icon>
+                </button>
+
+                <button *ngIf="!isMobile" (click)="exportToExcel('table')" mat-button class="button" matTooltip="Export data" color="primary">
+                    <mat-icon aria-label="main toolbar logout icon">cloud_download</mat-icon>
+                </button>
+
+                <button mat-button class="button" [matMenuTriggerFor]="options" matTooltip="more" color="primary">
+                    <mat-icon aria-label="main toolbar logout icon">more_vert</mat-icon>
+                </button>
+
+                <mat-menu #options="matMenu">
+                    <mat-nav-list>
+                        <div *ngIf="isMobile" class="mobile">
+                            <mat-list-item>
+                                <mat-icon aria-label="main toolbar logout icon">add_circle</mat-icon>
+                                <span>New Tank</span>
+                            </mat-list-item>
+
+                            <mat-list-item>
+                                <mat-icon aria-label="main toolbar logout icon">refresh</mat-icon>
+                                <span>Refresh data table</span>
+                            </mat-list-item>
+
+
+                            <mat-list-item (click)="exportToExcel('table')">
+                                <mat-icon aria-label="main toolbar logout icon">cloud_download</mat-icon>
+                                <span>Export data</span>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>
+
+                        <mat-list-item>
+                            <span>Show all</span>
+                        </mat-list-item>
+
+                        <mat-divider></mat-divider>
+
+
+                    </mat-nav-list>
+                </mat-menu>
+
+
+            </div>
+        </div>
+
+     <div *ngIf="gridData && gridData.length>0">
+        <mat-table [dataSource]="dataSource" matSort>
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index" matColumnDef="{{disCol.code}}">
+                <mat-header-cell *matHeaderCellDef> {{disCol.label}}</mat-header-cell>
+                <mat-cell *matCellDef="let element "> {{element[disCol.code]}} </mat-cell>
+            </ng-container>  
+            <mat-header-row *matHeaderRowDef="displayedColumnCodes; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumnCodes;"></mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+
+     </div>
+
+
+     <mat-card flex-gt-sm *ngIf="!dataTableConfig.isLoading && !dataTableConfig.isError && (!gridData || gridData.length<=0)"> 
+        <mat-card-content> 
+           <div style="text-align: center;"> 
+            <h3>{{dataTableConfig.emptyStateTitle}}</h3>
+            <h4>{{dataTableConfig.emptyStateSubTitle}}</h4>
+            <button mat-button class="button" (click)="createTank()" matTooltip="Add new" color="primary">
+                <mat-icon aria-label="main toolbar logout icon">add_circle</mat-icon>
+            </button>
+          </div> 
+        </mat-card-content>
+      </mat-card> 
+ 
+      <mat-card flex-gt-sm *ngIf="dataTableConfig && dataTableConfig.isError"> 
+        <mat-card-content> 
+           <div style="text-align: center;"> 
+            <h3> <mat-icon aria-label="main toolbar logout icon">error</mat-icon> {{dataTableConfig.errorMsg}}</h3>
+          </div> 
+        </mat-card-content>
+      </mat-card> 
+
+      <mat-card flex-gt-sm *ngIf="dataTableConfig && dataTableConfig.isLoading"> 
+        <mat-card-title style="text-align: center;"> 
+            Loading
+        </mat-card-title>
+        <mat-card-content> 
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card> 
+
+    </div>
+</div>
+

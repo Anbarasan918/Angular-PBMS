@@ -1,0 +1,120 @@
+<form [formGroup]="lubricationSales" class="tabs-form">
+    <table class="table table-border" [ngClass]="{'table-dark': mode}">
+        <thead class="text-nowrap">
+            <th  > 
+                <button    mat-button class="button" (click)="addRow()" matTooltip="Add new" color="primary">
+                    <mat-icon aria-label="main toolbar logout icon">add_circle</mat-icon>
+                </button>
+            </th>
+            <th>Select Lubricant</th>
+            <th>Opening Stock</th>
+            <th>Closing Stock</th>
+            <th>Sales Qty</th>
+            <th>Rate</th>
+            <th>Sales Amount</th>
+            <th>Net Sales Amount</th>
+        </thead>
+        <tbody>
+            <ng-container formArrayName="entries" *ngFor="let group of getFormControls.controls ; let i=index">
+                <tr [formGroupName]="i">
+                    <td class="add-row-btn">
+                        <button   mat-button class="button" (click)="deleteRow(i)" matTooltip="Add new" color="primary">
+                            <mat-icon aria-label="main toolbar logout icon">remove_circle</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <mat-select formControlName="selectLubricant" name="productId">
+                                <mat-option *ngFor="let product of products" [value]="product.uuid">
+                                    {{product.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.selectLubricant.touched==true">
+                        <div *ngIf="entries.controls[i].controls.selectLubricant.errors!=null && entries.controls[i].controls.selectLubricant.errors.required==true">
+                                SelectLubricant  is Required
+                        </div>
+                        </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="tetx" formControlName="openingStock">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.openingStock.touched==true">
+                        <div *ngIf="entries.controls[i].controls.openingStock.errors!=null && entries.controls[i].controls.openingStock.errors.required==true">
+                            OpeningStock  is Required
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="closingStock">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.closingStock.touched==true">
+                        <div *ngIf="entries.controls[i].controls.closingStock.errors!=null && entries.controls[i].controls.closingStock.errors.required==true">
+                            ClosingStock  is Required
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="number" formControlName="sales">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.sales.touched==true">
+                        <div *ngIf="entries.controls[i].controls.sales.errors!=null && entries.controls[i].controls.sales.errors.required==true">
+                            Sales  is Required
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="rate">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.rate.touched==true">
+                        <div *ngIf="entries.controls[i].controls.rate.errors!=null && entries.controls[i].controls.rate.errors.required==true">
+                            Rate  is Required
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="salesAmount">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.salesAmount.touched==true">
+                        <div *ngIf="entries.controls[i].controls.salesAmount.errors!=null && entries.controls[i].controls.salesAmount.errors.required==true">
+                            SalesAmount  is Required
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput type="text" formControlName="netSalesAmount">
+                        </mat-form-field>
+                        <div *ngIf="entries.controls[i].controls.netSalesAmount.touched==true">
+                        <div *ngIf="entries.controls[i].controls.netSalesAmount.errors!=null && entries.controls[i].controls.netSalesAmount.errors.required==true">
+                            NetSalesAmount  is Required
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                        <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
+                        <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+                    </td>
+                </tr>
+
+            </ng-container>
+        </tbody>
+    </table>
+    
+</form>
+<div class="footer">  
+    <span class="fill-space"></span>
+
+    <button mat-flat-button color="primary" (click)="onSubmit()" type="button">
+        <span>Submit</span>
+    </button>
+</div>
+
+<div class="content" >
+    <app-dynamic-table [displayedColumns]="displayedColumns"  [dataTableConfig]="dataTableConfig" [gridData]="lubricationSales.value.entries" ></app-dynamic-table>
+</div>
